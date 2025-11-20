@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Peace & Justice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Shapes */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            animation: backgroundMove 20s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Floating Geometric Shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.15;
+            z-index: 1;
+            animation: floatShape 25s infinite ease-in-out;
+            filter: blur(40px);
+        }
+
+        .bg-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .bg-shape:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            top: 50%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .bg-shape:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-80px) translateX(50px) rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(-150px) translateX(-30px) rotate(180deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-80px) translateX(60px) rotate(270deg) scale(1.05);
+            }
+        }
+
+        /* Animated Grid Lines */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(50px);
+            }
+        }
+
+        /* Content Wrapper */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header & Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .about-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 30px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h1 {
+            font-size: 42px;
+            color: #11998e;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            color: #11998e;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #38ef7d;
+            padding-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Mission & Vision Grid */
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .mv-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 5px solid #11998e;
+            transition: transform 0.3s;
+        }
+
+        .mv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(17, 153, 142, 0.2);
+        }
+
+        .mv-card h3 {
+            font-size: 24px;
+            color: #11998e;
+            margin-bottom: 15px;
+        }
+
+        /* SDG Section */
+        .sdg-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .sdg-image {
+            flex: 0 0 300px;
+        }
+
+        .sdg-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .sdg-text {
+            flex: 1;
+        }
+
+        /* Team Members */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(17, 153, 142, 0.3);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .team-card h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .team-card p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* Credits */
+        .credits-list {
+            margin-top: 20px;
+        }
+
+        .credits-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .credits-list li {
+            font-size: 18px;
+            color: #555;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .credits-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            font-size: 14px;
+            margin-top: 50px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .section {
+                padding: 30px 20px;
+            }
+
+            .section h1 {
+                font-size: 32px;
+            }
+
+            .section h2 {
+                font-size: 26px;
+            }
+
+            .mission-vision-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sdg-content {
+                flex-direction: column;
+            }
+
+            .sdg-image {
+                flex: 0 0 auto;
+                width: 100%;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="bg-shape"></div>
+    <div class="bg-shape"></div>
+    <div class="bg-shape"></div>
+
+    <div class="content-wrapper">
+    <!-- Header -->
+    <header>
+        <div class="logo">Peace & Justice</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#transparency">Transparency</a>
+            <a href="#legal-aid">Legal Aid</a>
+            <a href="#partnerships">Partnerships</a>
+            <a href="about.html" class="active">About</a>
+        </nav>
+    </header>
+
+    <!-- About Content -->
+    <div class="about-container">
+        
+        <!-- Website Description -->
+        <section class="section">
+            <h1>About Peace & Justice</h1>
+            <p>
+                Peace & Justice is a comprehensive platform dedicated to promoting transparency, 
+                accessibility, and collaboration in the pursuit of peace, justice, and strong institutions. 
+                Our website serves as a bridge between citizens, organizations, and government bodies, 
+                fostering an environment of trust and accountability.
+            </p>
+            <p>
+                Through innovative tools, open data initiatives, and community-driven partnerships, 
+                we empower individuals and organizations to work together towards building a more 
+                just and equitable society for all.
+            </p>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="section">
+            <h2>Mission & Vision</h2>
+            <div class="mission-vision-grid">
+                <div class="mv-card">
+                    <h3>🎯 Our Mission</h3>
+                    <p>
+                        To provide transparent, accessible, and actionable resources that empower 
+                        communities to advocate for justice, participate in governance, and collaborate 
+                        on sustainable peace-building initiatives.
+                    </p>
+                </div>
+                <div class="mv-card">
+                    <h3>🌟 Our Vision</h3>
+                    <p>
+                        A world where every individual has access to justice, where institutions are 
+                        accountable and inclusive, and where communities work together to create 
+                        lasting peace and prosperity for future generations.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SDG 16 Importance -->
+        <section class="section">
+            <h2>The Importance of SDG 16</h2>
+            <div class="sdg-content">
+                <div class="sdg-image">
+                    <img src="sdg 16.png" alt="SDG 16 - Peace, Justice and Strong Institutions">
+                </div>
+                <div class="sdg-text">
+                    <p>
+                        <strong>Sustainable Development Goal 16</strong> aims to promote peaceful and 
+                        inclusive societies for sustainable development, provide access to justice for all, 
+                        and build effective, accountable, and inclusive institutions at all levels.
+                    </p>
+                    <p>
+                        SDG 16 is crucial because without peace, stability, human rights, and effective 
+                        governance based on the rule of law, sustainable development cannot be achieved. 
+                        It addresses issues such as reducing violence, combating corruption, ensuring 
+                        responsive and inclusive decision-making, and providing legal identity for all.
+                    </p>
+                    <p>
+                        Our platform directly supports SDG 16 by promoting transparency, facilitating 
+                        access to legal aid, and fostering collaborative partnerships that strengthen 
+                        institutions and empower communities.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Members -->
+        <section class="section">
+            <h2>Our Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">OT</div>
+                    <h3>Om Thakkar</h3>
+                  
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">NP</div>
+                    <h3>Nidhi Pal</h3>
+                    
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">PB</div>
+                    <h3>Palak Bhanushali</h3>
+                   
+                </div>
+            </div>
+        </section>
+
+        <!-- Credits -->
+        <section class="section">
+            <h2>Credits & Acknowledgments</h2>
+            <div class="credits-list">
+                <ul>
+                    <li><strong>United Nations:</strong> SDG 16 framework and imagery</li>
+                    <li><strong>Open Data Initiative:</strong> Transparent data resources</li>
+                    <li><strong>Legal Aid Organizations:</strong> Guidance and partnership resources</li>
+                    <li><strong>Community Partners:</strong> NGOs and government bodies supporting our mission</li>
+                    <li><strong>Contributors:</strong> All volunteers and supporters who make this work possible</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2025 Peace and Justice — Built by Team
+    </footer>
+    </div>
+</body>
+</html>
