@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partnerships - Justice Connect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            animation: backgroundMove 20s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Floating Shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.15;
+            z-index: 1;
+            animation: floatShape 25s infinite ease-in-out;
+            filter: blur(40px);
+        }
+
+        .bg-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .bg-shape:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            top: 50%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .bg-shape:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-80px) translateX(50px) rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(-150px) translateX(-30px) rotate(180deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-80px) translateX(60px) rotate(270deg) scale(1.05);
+            }
+        }
+
+        /* Grid Animation */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(50px);
+            }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .page-hero {
+            width: 90%;
+            margin: 30px auto;
+            padding: 80px 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: white;
+            padding: 60px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h2 {
+            font-size: 32px;
+            color: #11998e;
+            margin-bottom: 25px;
+        }
+
+        .info-section p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Partner Types Grid */
+        .partner-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .partner-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.2);
+        }
+
+        .partner-card .icon {
+            font-size: 52px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .partner-card h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .partner-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .partner-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .partner-card li {
+            font-size: 14px;
+            color: #666;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .partner-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #11998e;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .benefit-box {
+            background: linear-gradient(135deg, #f6f9fc 0%, #ffffff 100%);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #11998e;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-box:hover {
+            border-left-width: 8px;
+            box-shadow: 0 4px 20px rgba(17, 153, 142, 0.15);
+            transform: translateX(5px);
+        }
+
+        .benefit-box h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .benefit-box p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Process Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #11998e, #38ef7d);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-content h3 {
+            font-size: 20px;
+            color: #11998e;
+            margin-bottom: 12px;
+        }
+
+        .timeline-content p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 0 0 6px rgba(17, 153, 142, 0.1);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            margin: 40px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-form h3 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #11998e;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            font-size: 14px;
+            margin-top: 50px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .page-hero {
+                padding: 50px 30px;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .info-section {
+                padding: 30px 20px;
+            }
+
+            .partner-types,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+                padding-left: 60px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-marker {
+                left: 30px;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="bg-shape"></div>
+    <div class="bg-shape"></div>
+    <div class="bg-shape"></div>
+
+    <div class="content-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="logo">Justice Connect</div>
+            <nav>
+                <a href="final.html">Home</a>
+                <a href="transparency.html">Transparency</a>
+                <a href="legal aid.html">Legal Aid</a>
+                <a href="#partnerships">Partnerships</a>
+                <a href="About.html">About</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <h1>Collaborative Partnerships</h1>
+            <p>Together we can create lasting change. Join NGOs, government agencies, and volunteers working towards peace and justice.</p>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Introduction -->
+            <section class="info-section">
+                <h2>🤝 Building Bridges for Change</h2>
+                <p>Justice Connect serves as a platform where diverse organizations and individuals unite for a common purpose. We believe that meaningful social change requires collaboration across sectors, bringing together the unique strengths of NGOs, government institutions, corporate partners, and passionate volunteers.</p>
+                <p>Our partnership ecosystem creates opportunities for resource sharing, knowledge exchange, and coordinated action on critical peace and justice issues affecting communities.</p>
+            </section>
+
+            <!-- Partner Types -->
+            <section class="partner-types">
+                <div class="partner-card">
+                    <span class="icon">🏢</span>
+                    <h3>NGO Partners</h3>
+                    <p>Civil society organizations working on human rights, legal reform, and community development.</p>
+                    <ul>
+                        <li>Access to shared resources</li>
+                        <li>Collaborative project opportunities</li>
+                        <li>Networking events and forums</li>
+                        <li>Capacity building programs</li>
+                    </ul>
+                </div>
+
+                <div class="partner-card">
+                    <span class="icon">🏛️</span>
+                    <h3>Government Agencies</h3>
+                    <p>Public sector institutions committed to transparency, accountability, and citizen engagement.</p>
+                    <ul>
+                        <li>Data sharing initiatives</li>
+                        <li>Policy consultation platforms</li>
+                        <li>Public-private partnerships</li>
+                        <li>Joint awareness campaigns</li>
+                    </ul>
+                </div>
+
+                <div class="partner-card">
+                    <span class="icon">💼</span>
+                    <h3>Corporate Partners</h3>
+                    <p>Businesses dedicated to corporate social responsibility and sustainable community impact.</p>
+                    <ul>
+                        <li>CSR project collaboration</li>
+                        <li>Employee volunteer programs</li>
+                        <li>Resource and expertise sharing</li>
+                        <li>Funding opportunities</li>
+                    </ul>
+                </div>
+
+                <div class="partner-card">
+                    <span class="icon">👥</span>
+                    <h3>Volunteer Networks</h3>
+                    <p>Individuals contributing time, skills, and passion to drive grassroots change.</p>
+                    <ul>
+                        <li>Skill-based volunteering</li>
+                        <li>Community outreach programs</li>
+                        <li>Training and development</li>
+                        <li>Recognition and awards</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Benefits Section -->
+            <section class="info-section">
+                <h2>💡 Partnership Benefits</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-box">
+                        <h4>Amplified Impact</h4>
+                        <p>Reach more beneficiaries and create deeper community change through coordinated efforts.</p>
+                    </div>
+                    <div class="benefit-box">
+                        <h4>Resource Optimization</h4>
+                        <p>Share tools, funding, and expertise to maximize efficiency and reduce duplication.</p>
+                    </div>
+                    <div class="benefit-box">
+                        <h4>Knowledge Exchange</h4>
+                        <p>Learn from best practices and innovative approaches across different sectors.</p>
+                    </div>
+                    <div class="benefit-box">
+                        <h4>Enhanced Credibility</h4>
+                        <p>Build organizational reputation through association with trusted partners.</p>
+                    </div>
+                    <div class="benefit-box">
+                        <h4>Sustainable Solutions</h4>
+                        <p>Develop long-term programs with diverse stakeholder support and commitment.</p>
+                    </div>
+                    <div class="benefit-box">
+                        <h4>Innovation Catalyst</h4>
+                        <p>Spark creative solutions through diverse perspectives and collaborative thinking.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Partnership Process -->
+            <section class="info-section">
+                <h2>📋 How to Partner With Us</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <h3>Initial Contact</h3>
+                            <p>Fill out our partnership inquiry form or reach out via email. Tell us about your organization and partnership interests.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <h3>Discovery Meeting</h3>
+                            <p>We schedule a consultation to understand your goals, resources, and how we can work together effectively.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <h3>Proposal Development</h3>
+                            <p>Collaboratively design a partnership framework that aligns with both organizations' missions and capacities.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <h3>Agreement & Launch</h3>
+                            <p>Formalize the partnership with clear terms, launch collaborative projects, and begin making impact together.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker">5</div>
+                        <div class="timeline-content">
+                            <h3>Ongoing Collaboration</h3>
+                            <p>Regular check-ins, impact monitoring, and continuous improvement of our partnership activities.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <h2>Ready to Make a Difference Together?</h2>
+                <p>Join our growing network of partners committed to building a more just and peaceful society.</p>
+                <a href="#contact-form" class="cta-button">Start a Partnership</a>
+            </section>
+
+            <!-- Contact Form -->
+            <section class="contact-form" id="contact-form">
+                <h3>Partnership Inquiry Form</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="org-name">Organization Name *</label>
+                        <input type="text" id="org-name" name="org-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-name">Contact Person *</label>
+                        <input type="text" id="contact-name" name="contact-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="partner-type">Partnership Type *</label>
+                        <select id="partner-type" name="partner-type" required>
+                            <option value="">Select Type</option>
+                            <option value="ngo">NGO Partner</option>
+                            <option value="government">Government Agency</option>
+                            <option value="corporate">Corporate Partner</option>
+                            <option value="volunteer">Volunteer Network</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Tell us about your organization and partnership goals *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Inquiry</button>
+                </form>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            © 2025 Peace and Justice – Built by Team
+        </footer>
+    </div>
+</body>
+</html>

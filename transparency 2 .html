@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparency - Justice Connect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            animation: backgroundMove 20s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Floating Shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.15;
+            z-index: 1;
+            animation: floatShape 25s infinite ease-in-out;
+            filter: blur(40px);
+        }
+
+        .bg-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .bg-shape:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            top: 50%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .bg-shape:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-80px) translateX(50px) rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(-150px) translateX(-30px) rotate(180deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-80px) translateX(60px) rotate(270deg) scale(1.05);
+            }
+        }
+
+        /* Grid Animation */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 30s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(50px);
+            }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .page-hero {
+            width: 90%;
+            margin: 30px auto;
+            padding: 80px 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: white;
+            padding: 60px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h2 {
+            font-size: 32px;
+            color: #11998e;
+            margin-bottom: 25px;
+        }
+
+        .info-section p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .info-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .info-section li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #11998e;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* Data Cards Grid */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .data-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.2);
+        }
+
+        .data-card h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .data-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .data-card .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.3);
+        }
+
+        /* Vision Box */
+        .vision-box {
+            background: linear-gradient(135deg, #f6f9fc 0%, #e8f5e9 100%);
+            padding: 40px;
+            border-radius: 8px;
+            border-left: 5px solid #11998e;
+            margin: 40px 0;
+        }
+
+        .vision-box h3 {
+            font-size: 24px;
+            color: #11998e;
+            margin-bottom: 15px;
+        }
+
+        .vision-box p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            font-size: 14px;
+            margin-top: 50px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .page-hero {
+                padding: 50px 30px;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .info-section {
+                padding: 30px 20px;
+            }
+
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="bg-shape"></div>
+    <div class="bg-shape"></div>
+    <div class="bg-shape"></div>
+
+    <div class="content-wrapper">
+        <!-- Header -->
+        <header>
+            <div class="logo">Justice Connect</div>
+            <nav>
+                <a href="final.html">Home</a>
+                <a href="transparency.html">Transparency</a>
+                <a href="legal aid.html">Legal Aid</a>
+                <a href="partnerships.html">Partnerships</a>
+                <a href="About.html">About</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <h1>Transparency Hub</h1>
+            <p>We're students learning to make a difference. Here's our journey toward promoting open governance and accessible justice information.</p>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Introduction -->
+            <section class="info-section">
+                <h2>🎓 Our Student Initiative</h2>
+                <p>Hi! We're a group of college students passionate about justice and transparency. This website is our project to understand and share how transparency can help build a fairer society.</p>
+                <p>We're just starting out, but we believe that even small efforts can create awareness about important issues like government accountability, legal rights, and access to information.</p>
+            </section>
+
+            <!-- Vision -->
+            <div class="vision-box">
+                <h3>💡 What We're Learning About</h3>
+                <p>Through this project, we're exploring how transparency works in governance, why it matters for citizens, and how technology can help make information more accessible. We're documenting our learning journey and sharing it with you!</p>
+            </div>
+
+            <!-- What We Cover -->
+            <section class="info-section">
+                <h2>📚 Topics We're Exploring</h2>
+                <div class="data-grid">
+                    <div class="data-card">
+                        <span class="icon">⚖️</span>
+                        <h3>Understanding Court Systems</h3>
+                        <p>Learning about how courts work, what public records mean, and why court transparency matters for justice.</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://main.sci.gov.in" target="_blank" class="learn-more-btn">Supreme Court</a>
+                            <a href="https://www.ecourts.gov.in" target="_blank" class="learn-more-btn">eCourts</a>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <span class="icon">💰</span>
+                        <h3>Government Budgets 101</h3>
+                        <p>Studying how government spending works and why citizens should know where tax money goes.</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://www.indiabudget.gov.in" target="_blank" class="learn-more-btn">India Budget</a>
+                            <a href="https://data.gov.in" target="_blank" class="learn-more-btn">Open Data</a>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <span class="icon">📊</span>
+                        <h3>Open Data Basics</h3>
+                        <p>Exploring what open data means, which countries do it well, and how it helps fight corruption.</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://data.gov.in" target="_blank" class="learn-more-btn">OGD India</a>
+                            <a href="https://www.opengovpartnership.org" target="_blank" class="learn-more-btn">OGP</a>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <span class="icon">📰</span>
+                        <h3>Right to Information</h3>
+                        <p>Understanding RTI laws, how citizens can use them, and real-world examples of their impact.</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://rti.gov.in" target="_blank" class="learn-more-btn">RTI Portal</a>
+                            <a href="https://rtionline.gov.in" target="_blank" class="learn-more-btn">File RTI</a>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <span class="icon">🔍</span>
+                        <h3>Finding Public Records</h3>
+                        <p>Compiling helpful links and guides on where to find government documents and public information online.</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://www.india.gov.in" target="_blank" class="learn-more-btn">India Portal</a>
+                            <a href="https://www.legalservicesindia.com" target="_blank" class="learn-more-btn">Legal Info</a>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <span class="icon">📖</span>
+                        <h3>Success Stories</h3>
+                        <p>Collecting inspiring cases where transparency helped solve real problems in communities.</p>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://www.transparency.org" target="_blank" class="learn-more-btn">Transparency Intl</a>
+                            <a href="https://www.prsindia.org" target="_blank" class="learn-more-btn">PRS Research</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why We Care -->
+            <section class="info-section">
+                <h2>🌟 Why This Matters to Us</h2>
+                <p>As students, we're learning that:</p>
+                <ul>
+                    <li>When governments are transparent, people can trust them more</li>
+                    <li>Access to information is a fundamental right everyone should have</li>
+                    <li>Technology can help make government data easier to understand</li>
+                    <li>Young people can contribute to social change, even while learning</li>
+                    <li>Small awareness efforts can grow into bigger movements</li>
+                </ul>
+            </section>
+
+            <!-- Resources -->
+            <section class="info-section">
+                <h2>🔗 Helpful Resources We Found</h2>
+                <p>During our research, we discovered some great websites and tools that explain transparency and open governance. These helped us learn, and we hope they help you too!</p>
+                
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: #333;">Government Data Portals:</h3>
+                <ul>
+                    <li><a href="https://data.gov.in" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">Open Government Data (OGD) Platform India</a> - Access datasets from various government departments</li>
+                    <li><a href="https://rti.gov.in" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">RTI Online Portal</a> - File Right to Information requests online</li>
+                    <li><a href="https://www.india.gov.in" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">National Portal of India</a> - Central platform for government information and services</li>
+                </ul>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: #333;">Legal & Court Information:</h3>
+                <ul>
+                    <li><a href="https://main.sci.gov.in" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">Supreme Court of India</a> - Access judgments, case status, and court orders</li>
+                    <li><a href="https://www.ecourts.gov.in" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">eCourts Services</a> - Track court cases across India</li>
+                    <li><a href="https://www.legalservicesindia.com" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">Legal Services India</a> - Free legal information and resources</li>
+                </ul>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: #333;">Transparency Organizations:</h3>
+                <ul>
+                    <li><a href="https://www.transparency.org" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">Transparency International</a> - Global coalition against corruption</li>
+                    <li><a href="https://www.commonlii.org" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">CommonLII</a> - Free access to legal information from Commonwealth countries</li>
+                    <li><a href="https://www.prsindia.org" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">PRS Legislative Research</a> - Track bills, laws, and parliamentary debates</li>
+                </ul>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: #333;">Learn More About Transparency:</h3>
+                <ul>
+                    <li><a href="https://www.opengovpartnership.org" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">Open Government Partnership</a> - International platform for government transparency</li>
+                    <li><a href="https://www.worldbank.org/en/topic/governance" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">World Bank - Governance</a> - Resources on governance and transparency</li>
+                    <li><a href="https://www.un.org/en/transparency" target="_blank" style="color: #11998e; text-decoration: none; font-weight: 500;">UN Transparency</a> - Global perspectives on open governance</li>
+                </ul>
+            </section>
+
+            <!-- Work in Progress -->
+            <div class="vision-box">
+                <h3>🚧 Work in Progress!</h3>
+                <p>This page is still under development as we continue learning. We're working on adding more resources, case studies, and practical guides. If you have suggestions or want to help us improve this section, we'd love to hear from you!</p>
+            </div>
+
+            <!-- Join Us -->
+            <section class="info-section">
+                <h2>🤝 Join Our Learning Journey</h2>
+                <p>We're always looking to connect with other students, educators, and organizations interested in justice and transparency. Whether you want to share resources, give feedback, or collaborate on a project, reach out to us!</p>
+                <p>Together, we can learn more and make a positive impact in our communities.</p>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            © 2025 Peace and Justice – Built by Team
+        </footer>
+    </div>
+</body>
+</html>
